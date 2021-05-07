@@ -7,7 +7,23 @@ name: Deploy to Firebase Hosting on merge
     branches:
       - main
 jobs:
-  build_and_deploy:
+  build:
+    name:Build
+    runs-on:ubuntu-latest
+    steps:
+      -name:Checkout repository
+      -uses:actions/checkout@v2
+      -name:Install dependencies
+      -run:npmm ci
+      -name:Build dependencies
+      -run:npm run build
+       with:
+        name:dist
+        path:dist
+      
+      
+  
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
